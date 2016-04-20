@@ -11,6 +11,10 @@ public class Node {
 		this.name = name;
 		successors = new HashMap<>();
 	}
+	
+	public void addSuccessor (Node node, int distance) {
+		successors.put(node, distance);
+	}
 
 	public String getName() {
 		return name;

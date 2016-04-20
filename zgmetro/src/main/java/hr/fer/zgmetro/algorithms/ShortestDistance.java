@@ -1,9 +1,7 @@
 package hr.fer.zgmetro.algorithms;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
@@ -46,23 +44,6 @@ public class ShortestDistance {
 			}
 		}		
 		return -1;
-	}
-	
-	public static void main(String[] args) {
-		
-		try {
-			FileLoader fl = new FileLoader("metro.txt");
-			Graph graph = fl.load();
-			System.out.println("SADFASD");
-			System.out.println(calculate(graph, "DUBRAVA", "DUBRAVA"));
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
 	}
 	
 }

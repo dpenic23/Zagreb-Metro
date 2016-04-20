@@ -1,6 +1,8 @@
 package hr.fer.zgmetro.model;
 
 import java.util.HashMap;
+import java.util.Map;
+
 import hr.fer.zgmetro.model.loader.IGraphLoader;
 
 public class Graph {

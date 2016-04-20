@@ -14,11 +14,10 @@ public class JSONTest_JSON_To_JavaObject {
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		
-		// JSON to Object
 		User user = mapper.readValue(new File("./inputJSON/user.json"), User.class);
 		System.out.println(user);
 
-		// JSON string to Object
+		// Convert JSON string to Object
 		String jsonInString = "{\"age\":33,\"messages\":[\"msg 1\",\"msg 2\"],\"name\":\"mkyong\"}";
 		User user1 = mapper.readValue(jsonInString, User.class);
 		System.out.println(user1);

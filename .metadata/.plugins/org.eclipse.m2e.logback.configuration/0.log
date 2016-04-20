@@ -652,3 +652,11 @@
 2016-04-21 01:11:13,266 [Worker-50] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\Users\harko\projektZagreb_Metro\zgmetro\src\main\resources
 2016-04-21 01:11:13,266 [Worker-50] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2016-04-21 01:11:13,266 [Worker-50] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\Users\harko\projektZagreb_Metro\zgmetro\src\test\resources
+2016-04-21 01:14:01,598 [Worker-52] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-04-21 01:14:01,598 [Worker-52] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\Users\harko\projektZagreb_Metro\zgmetro\src\main\resources
+2016-04-21 01:14:01,600 [Worker-52] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-04-21 01:14:01,600 [Worker-52] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\Users\harko\projektZagreb_Metro\zgmetro\src\test\resources
+2016-04-21 01:14:20,189 [Worker-46] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-04-21 01:14:20,189 [Worker-46] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\Users\harko\projektZagreb_Metro\zgmetro\src\main\resources
+2016-04-21 01:14:20,189 [Worker-46] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-04-21 01:14:20,190 [Worker-46] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\Users\harko\projektZagreb_Metro\zgmetro\src\test\resources

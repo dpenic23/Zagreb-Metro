@@ -1,0 +1,5 @@
+package hr.fer.zgmetro.controller;
+
+public class JSONTest_JSON_To_JavaObject {
+
+}

@@ -12,11 +12,11 @@ public class TestLoader implements IGraphLoader {
 		HashMap<String, Node> nodes = new HashMap<>();
 		
 		//Create metro stations
-		Node maksimir = new Node("Maksimir");
-		Node siget = new Node("Siget");
-		Node spansko = new Node("Spansko");
-		Node medvescak = new Node("Medvescak");
-		Node dubrava = new Node("Dubrava");
+		Node maksimir = new Node("MAKSIMIR");
+		Node siget = new Node("SIGET");
+		Node spansko = new Node("SPANSKO");
+		Node medvescak = new Node("MEDVESCAK");
+		Node dubrava = new Node("DUBRAVA");
 		
 		//Add transitions
 		maksimir.addSuccessor(siget, 5);
@@ -30,11 +30,11 @@ public class TestLoader implements IGraphLoader {
 		maksimir.addSuccessor(dubrava, 7);
 
 		//Add nodes to map
-		nodes.put("Maksimir", maksimir);
-		nodes.put("Siget", siget);
-		nodes.put("Spansko", spansko);
-		nodes.put("Medvescak", medvescak);
-		nodes.put("Dubrava", dubrava);
+		nodes.put("MAKSIMIR", maksimir);
+		nodes.put("SIGET", siget);
+		nodes.put("SPANSKO", spansko);
+		nodes.put("MEDVESCAK", medvescak);
+		nodes.put("DUBRAVA", dubrava);
 		
 		return new Graph(nodes);
 				

@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 import hr.fer.zgmetro.model.Graph;
 import hr.fer.zgmetro.model.Node;
 import hr.fer.zgmetro.model.Path;
-import hr.fer.zgmetro.model.loader.FileLoader;
 
 public class TripCounter {
 
@@ -15,11 +14,11 @@ public class TripCounter {
 	public static List<Path> calculate(Graph graph, String start, String end, int stops) {
 
 		List<Path> paths = new LinkedList<>();
-		
-		for(LinkedList<String> l : recursion(graph, start, end, stops+1))	{
+
+		for (LinkedList<String> l : recursion(graph, start, end, stops + 1)) {
 			paths.add(new Path(l));
 		}
-		
+
 		return paths;
 	}
 

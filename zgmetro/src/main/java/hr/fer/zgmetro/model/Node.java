@@ -20,6 +20,9 @@ public class Node {
 		return successors;
 	}
 
+	public void addSuccessor(Node successor, Integer distance){
+		successors.put(successor,distance );
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

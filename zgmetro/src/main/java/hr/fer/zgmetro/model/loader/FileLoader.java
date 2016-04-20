@@ -43,10 +43,7 @@ public class FileLoader implements IGraphLoader {
 		}
 		createNodes(edgesMap);
 	}
-	
-	private void findSuccesors(Node node){
-		
-	}
+
 	private void createNodes(Map<String, String> edges){
 		
 		for(Map.Entry<String, String> e: edges.entrySet()){

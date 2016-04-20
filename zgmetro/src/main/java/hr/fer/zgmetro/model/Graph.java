@@ -19,14 +19,4 @@ public class Graph {
 		return nodes.get(name);
 	}
 	
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		for(Map.Entry<String, Node> entry : nodes.entrySet()){
-			sb.append(entry.getKey());
-			sb.append("\n");
-		}
-		return sb.toString();
-	}
-
 }

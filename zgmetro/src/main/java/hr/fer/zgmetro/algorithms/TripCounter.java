@@ -1,15 +1,13 @@
 package hr.fer.zgmetro.algorithms;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.TreeMap;
-
 import hr.fer.zgmetro.model.Graph;
 import hr.fer.zgmetro.model.Node;
 import hr.fer.zgmetro.model.Path;
+import hr.fer.zgmetro.model.loader.FileLoader;
 
 public class TripCounter {
 

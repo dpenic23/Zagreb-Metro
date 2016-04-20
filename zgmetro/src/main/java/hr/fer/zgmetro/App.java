@@ -19,7 +19,7 @@ public class App {
 		FileLoader loader;
 		Graph graph;
 		
-			loader = new FileLoader();
+			loader = new FileLoader("metro.txt");
 			graph = loader.load();
 			System.out.println(graph.toString());
 		

@@ -16,68 +16,63 @@ import hr.fer.zgmetro.model.Node;
 
 public class FileLoader implements IGraphLoader {
 
-	
-	private Map<String,String> edgesMap = new HashMap<>();
-	private HashMap<String,Node> nodes = new HashMap<>();
+	private Map<String, String> edgesMap = new HashMap<>();
+	private HashMap<String, Node> nodes = new HashMap<>();
 	private Graph graph;
-	
-	public FileLoader() throws IOException {
 
-		//BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		List<String> lines = Files.readAllLines(
-				Paths.get("./inputFiles/metro.txt"),
-				StandardCharsets.UTF_8
-				);
-		
+	public FileLoader(String filename) throws IOException {
+		String path = "./inputFiles/" + filename.trim();
+	
+		List<String> lines = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
+
 		String line = lines.get(0);
 		parse(line);
 		graph = new Graph(nodes);
-		
+
 	}
 
-	private void parse(String line){
-		String [] edges = line.trim().split(",");
-		for(String e: edges){
-			String [] splitEdgeFromDistance = e.split(":");
+	private void parse(String line) {
+		String[] edges = line.trim().split(",");
+		for (String e : edges) {
+			String[] splitEdgeFromDistance = e.split(":");
 			edgesMap.put(splitEdgeFromDistance[0], splitEdgeFromDistance[1]);
 		}
 		createNodes(edgesMap);
 	}
 
-	private void createNodes(Map<String, String> edges){
-		
-		for(Map.Entry<String, String> e: edges.entrySet()){
-			
+	private void createNodes(Map<String, String> edges) {
+
+		for (Map.Entry<String, String> e : edges.entrySet()) {
+
 			int distance = Integer.parseInt(e.getValue());
-			String [] stationNode = e.getKey().split("-");
+			String[] stationNode = e.getKey().split("-");
 			String firstStation = stationNode[0].trim();
 			String secondStation = stationNode[1].trim();
 			Node node1;
 			Node node2;
-			
-			if(!nodes.containsKey(firstStation)){
+
+			if (!nodes.containsKey(firstStation)) {
 				node1 = new Node(firstStation);
 				nodes.put(firstStation, node1);
-				
-			}else{
+
+			} else {
 				node1 = nodes.get(firstStation);
 			}
-			
-			if(!nodes.containsKey(secondStation)){
+
+			if (!nodes.containsKey(secondStation)) {
 				node2 = new Node(secondStation);
 				nodes.put(secondStation, node2);
-			}else{
+			} else {
 				node2 = nodes.get(secondStation);
 			}
-			
-			node1.addSuccessor(node2, distance);		
+
+			node1.addSuccessor(node2, distance);
 		}
 	}
-	
-	
-	 @Override
-	 public Graph load() {
-		 return graph;
-	 }
-	 
+
+	@Override
+	public Graph load() {
+		return graph;
+	}
+
 }

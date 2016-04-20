@@ -20,8 +20,9 @@ public class App {
 	public static void main(String[] args) {
 		FileLoader loader;
 		try {
-			loader = new FileLoader();
+			loader = new FileLoader("metro.txt");
 			Graph graph = loader.load();
+		
 			System.out.println(graph.toString());
 			
 			// Testing TripDistance algorithm

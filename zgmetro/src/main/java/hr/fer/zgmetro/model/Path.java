@@ -15,9 +15,10 @@ public class Path {
 		StringBuilder sb = new StringBuilder();
 		for(String s : path)	{
 			sb.append(s);
-			if(path.iterator().hasNext())
-				sb.append("-");
+			sb.append("-");
 		}
+		sb.deleteCharAt(sb.length()-1);
+		
 		return sb.toString();
 	}
 

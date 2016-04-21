@@ -33,6 +33,6 @@ public class AppJSON {
 		System.out.println("Distance: " + dist);	//MAKSIMIR-SIGET-SPANSKO
 		System.out.println("Distance: "+ dist2);	//MAKSIMIR-DUBRAVA-SIGET-SPANSKO-MEDVESCAK
 		System.out.println("Distance: "+ dist3);	//MAKSIMIR-DUBRAVA-MEDVESCAK
-	//	System.out.println("Distance: "+ dist4);	//MAKSIMIR-MAKSIMIR, TODO treba ispisat 5!!!
+		System.out.println("Distance: "+ dist4);	//MAKSIMIR-MAKSIMIR, TODO treba ispisat 5!!!
 	}
 }

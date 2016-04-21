@@ -1,13 +1,11 @@
 package hr.fer.zgmetro.algorithms;
 
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 import hr.fer.zgmetro.model.Graph;
 import hr.fer.zgmetro.model.Node;
-import hr.fer.zgmetro.model.loader.FileLoader;
 
 public class ShortestDistance {
 
@@ -45,5 +43,4 @@ public class ShortestDistance {
 		}		
 		return -1;
 	}
-	
 }

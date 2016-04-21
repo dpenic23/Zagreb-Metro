@@ -15,7 +15,7 @@ public class TripCounter {
 
 		List<Path> paths = new LinkedList<>();
 
-		for (LinkedList<String> l : recursion(graph, start, end, stops + 1)) {
+		for (LinkedList<String> l : recursion(graph, start, end, stops)) {
 			paths.add(new Path(l));
 		}
 
@@ -50,5 +50,4 @@ public class TripCounter {
 
 		return ret;
 	}
-
 }

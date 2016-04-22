@@ -24,7 +24,8 @@ public class Graph {
 			Node currentNode = e.getValue();
 			HashMap<Node, Integer> successors = currentNode.getSuccessors();
 			for (Map.Entry<Node,Integer> succ : successors.entrySet()) {
-				sb.append("From "+e.getKey() + " to " + succ.getKey().getName() + "-> "+succ.getValue() + "\n");
+				// Add line in format : "From <start> to <end> -> <distance>"
+				sb.append("From ").append(e.getKey()).append(" to ").append(succ.getKey().getName()).append(" -> ").append(succ.getValue()).append("\n");
 			}
 		}
 		

@@ -20,20 +20,16 @@ public class FileLoader implements IGraphLoader {
 	public FileLoader(String filename) throws IOException {
 		String path = "./inputFiles/" + filename.trim();
 
-		try {
-			List<String> lines = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
-			String line = "";
-			
-			for (String l : lines) {
-				line += l;
-			}
-			
-			parse(line);
-			graph = new Graph(nodes);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
+		List<String> lines = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
+		String line = "";
+
+		for (String l : lines) {
+			line += l;
 		}
+
+		parse(line);
+		graph = new Graph(nodes);
+
 	}
 
 	private void parse(String line) throws LoaderException {

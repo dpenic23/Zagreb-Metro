@@ -14,7 +14,7 @@ public class BaseController {
 	private static final String VIEW_INDEX = "index";
 	private final static org.slf4j.Logger logger = LoggerFactory.getLogger(BaseController.class);
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/ignore", method = RequestMethod.GET)
 	public String welcome(ModelMap model) {
 
 		model.addAttribute("message", "Welcome");
@@ -26,7 +26,7 @@ public class BaseController {
 
 	}
 
-	@RequestMapping(value = "/{name}", method = RequestMethod.GET)
+	@RequestMapping(value = "/ignore/{name}", method = RequestMethod.GET)
 	public String welcomeName(@PathVariable String name, ModelMap model) {
 		model.addAttribute("message", "Welcome " + name);
 		model.addAttribute("counter", ++counter);

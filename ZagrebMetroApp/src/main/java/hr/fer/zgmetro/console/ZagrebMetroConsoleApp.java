@@ -11,6 +11,7 @@ import hr.fer.zgmetro.model.loader.FileLoader;
 public class ZagrebMetroConsoleApp {
 	public static void main(String[] args) {
 		FileLoader loader;
+
 		try {
 			loader = new FileLoader("metro.txt");
 			Graph graph = loader.load();

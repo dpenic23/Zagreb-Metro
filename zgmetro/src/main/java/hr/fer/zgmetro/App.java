@@ -3,12 +3,8 @@ package hr.fer.zgmetro;
 import java.util.ArrayList;
 
 import hr.fer.zgmetro.algorithms.TripDistance;
-import hr.fer.zgmetro.controller.JSONTest_JavaObject_To_JSON;
 import hr.fer.zgmetro.model.Graph;
-import hr.fer.zgmetro.model.loader.TestLoader;
-
 import java.io.IOException;
-
 import hr.fer.zgmetro.model.loader.FileLoader;
 
 

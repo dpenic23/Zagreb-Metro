@@ -1,12 +1,9 @@
 package hr.fer.zgmetro.model.loader;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,22 +19,37 @@ public class FileLoader implements IGraphLoader {
 
 	public FileLoader(String filename) throws IOException {
 		String path = "./inputFiles/" + filename.trim();
-	
-		List<String> lines = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
 
-		String line = lines.get(0);
-		parse(line);
-		graph = new Graph(nodes);
-
+		try {
+			List<String> lines = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
+			String line = "";
+			
+			for (String l : lines) {
+				line += l;
+			}
+			
+			parse(line);
+			graph = new Graph(nodes);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private void parse(String line) {
-		String[] edges = line.trim().split(",");
-		for (String e : edges) {
-			String[] splitEdgeFromDistance = e.split(":");
-			edgesMap.put(splitEdgeFromDistance[0], splitEdgeFromDistance[1]);
+	private void parse(String line) throws LoaderException {
+		if (line.equals("")) {
+			throw new LoaderException("Input file is empty!");
 		}
-		createNodes(edgesMap);
+		String[] edges = line.trim().split(",");
+		try {
+			for (String e : edges) {
+				String[] splitEdgeFromDistance = e.split(":");
+				edgesMap.put(splitEdgeFromDistance[0], splitEdgeFromDistance[1]);
+			}
+			createNodes(edgesMap);
+		} catch (Exception e) {
+			throw new LoaderException("Invalid input in file!");
+		}
 	}
 
 	private void createNodes(Map<String, String> edges) {

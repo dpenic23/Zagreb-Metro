@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import hr.fer.zgmetro.algorithms.TripCounter;
 import hr.fer.zgmetro.algorithms.TripDistance;
 import hr.fer.zgmetro.model.Graph;
-import hr.fer.zgmetro.model.Path;
-import hr.fer.zgmetro.model.loader.TestLoader;
 import java.io.IOException;
 import hr.fer.zgmetro.model.loader.FileLoader;
 

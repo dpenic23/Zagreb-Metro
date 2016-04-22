@@ -2,9 +2,11 @@ package hr.fer.zgmetro;
 
 import java.util.ArrayList;
 
+import hr.fer.zgmetro.algorithms.TripCounter;
 import hr.fer.zgmetro.algorithms.TripDistance;
 import hr.fer.zgmetro.controller.JSONTest_JavaObject_To_JSON;
 import hr.fer.zgmetro.model.Graph;
+import hr.fer.zgmetro.model.Path;
 import hr.fer.zgmetro.model.loader.TestLoader;
 
 import java.io.IOException;
@@ -26,7 +28,7 @@ public class App {
 		
 			System.out.println(graph.toString());
 			
-			// Testing TripDistance algorithm
+			// Testing TripDistance algorithm METRO-2
 			System.out.println("\nTesting TripDistance algorithm.");
 			ArrayList<String> trip = new ArrayList<String>();
 						
@@ -66,7 +68,16 @@ public class App {
 			trip.add("MEDVESCAK");
 			System.out.println("distance 5 = " + TripDistance.calculate(graph,trip));
 			
-
+			// Testing TripCounter algorithm METRO-3 METRO-4
+			String station;
+			System.out.println("Testing TripCounter algorithm.");
+			
+			//Case 1
+			station = "SPANSKO";
+			for (int i=1; i<=3; i++)
+				System.out.println("roundtrips 1 = " + TripCounter.calculate(graph, station, station, i).toString());
+			
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

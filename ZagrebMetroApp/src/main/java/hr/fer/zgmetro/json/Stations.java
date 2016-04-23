@@ -1,14 +1,8 @@
 package hr.fer.zgmetro.json;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class Stations implements Serializable {
-
-	/**
-	 * Default serial version ID.
-	 */
-	private static final long serialVersionUID = 1L;
+public class Stations {
 
 	private List<String> stations;
 

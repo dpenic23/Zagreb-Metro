@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import hr.fer.zgmetro.json.Distance;
+import hr.fer.zgmetro.json.PairOfStations;
 import hr.fer.zgmetro.json.Stations;
 import hr.fer.zgmetro.model.Graph;
 import hr.fer.zgmetro.model.loader.FileLoader;
@@ -80,18 +81,20 @@ public class MetroTripController {
 
 		try {
 			String jsonRequest = IOUtil.getStringFromInputStream(request.getInputStream());
-			Stations stations = JSONConverter.convertJSONStringToStations(jsonRequest);
-			logger.debug("Calculating trip distance for stations: " + stations.getStations().toString());
+			PairOfStations stations = JSONConverter.convertJSONStringToPairOfStations(jsonRequest);
+			logger.debug("Calculating shortest path between stations.");
 
 			Graph graph = loadGraph(request);
-			int distance = GraphUtil.calculateTripDistance(graph, stations.getStations());
+			int distance = GraphUtil.calculateShortestDistance(graph, stations.getStations().get("start"),
+					stations.getStations().get("end"));
 
-			String returnValue = "a";
+			String returnValue;
 			if (distance == -1) {
 				returnValue = "NO SUCH ROUTE";
 			} else {
-				//returnValue = JSONConverter.convertDistanceToJSONString(new Distance(distance));
+				returnValue = distance + "";
 			}
+
 			model.addAttribute("json", returnValue);
 		} catch (Exception e) {
 			logger.debug(e.getLocalizedMessage());

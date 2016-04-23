@@ -16,11 +16,12 @@ public class GraphUtilTest extends TestCase {
 		IGraphLoader graphLoader = new FileLoader("src/main/resources/metro.txt");
 		graph = graphLoader.load();
 	}
-
+	
 	public void testShortestDistance() {
 		ShortestDistanceAlgorithm sda = new DijkstrasAlgorithm();
 		int distance = GraphUtil.calculateShortestDistance(graph, "MAKSIMIR", "DUBRAVA", sda);
 		assertEquals(distance, 7);
 	}
 
+	
 }

@@ -22,6 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import hr.fer.zgmetro.json.Distance;
 import hr.fer.zgmetro.json.Stations;
+import hr.fer.zgmetro.model.Graph;
+import hr.fer.zgmetro.model.loader.FileLoader;
+import hr.fer.zgmetro.model.loader.IGraphLoader;
+import hr.fer.zgmetro.util.GraphUtil;
 import hr.fer.zgmetro.util.IOUtil;
 import hr.fer.zgmetro.util.JSONConverter;
 
@@ -40,30 +44,29 @@ public class MetroTripController {
 			String jsonRequest = IOUtil.getStringFromInputStream(request.getInputStream());
 			Stations stations = JSONConverter.convertJSONStringToStations(jsonRequest);
 			logger.debug("Calculating trip distance for stations: " + stations.getStations().toString());
+
+			Graph graph = loadGraph(request);
+			int distance = GraphUtil.calculateTripDistance(graph, stations.getStations());
+
+			String returnValue;
+			if (distance == -1) {
+				returnValue = "NO SUCH ROUTE";
+			} else {
+				returnValue = JSONConverter.convertDistanceToJSONString(new Distance(distance));
+			}
+			model.addAttribute("json", returnValue);
 		} catch (Exception e) {
 			logger.debug(e.getLocalizedMessage());
 		}
-
-		List<String> stations = new ArrayList<String>();
-
-		String a =request.getServletContext().getRealPath("/") + "WEB-INF/metro.txt";
-		File file = new File(a);
-		logger.debug(file.exists() + "");
-		// model.addAttribute("message", "Distance to be calculated...");
-		// model.addAttribute("message", stations.getStations().get(0));
-
-		Distance distance = new Distance();
-		distance.setDistance(3);
-		
 
 		return VIEW_INDEX;
 	}
 
 	@RequestMapping(value = "/trip/round/count/{station}", method = RequestMethod.GET)
-	public String calculateRoundTrips(@PathVariable String station, ModelMap model) {
+	public String calculateRoundTrips(@PathVariable String station, ModelAndView modelAndView) {
 
 		logger.debug("Round trips to be calculated...");
-		model.addAttribute("message", station);
+		// model.addAttribute("message", station);
 
 		return VIEW_INDEX;
 
@@ -88,6 +91,12 @@ public class MetroTripController {
 		model.addAttribute("message", "Shortest path to be calculated...");
 
 		return VIEW_INDEX;
+	}
+
+	private Graph loadGraph(HttpServletRequest request) {
+		String path = request.getServletContext().getRealPath("/") + "WEB-INF/metro.txt";
+		IGraphLoader graphLoader = new FileLoader(path);
+		return graphLoader.load();
 	}
 
 }

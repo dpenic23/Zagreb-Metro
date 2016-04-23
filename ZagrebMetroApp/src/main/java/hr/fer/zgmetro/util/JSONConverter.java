@@ -23,4 +23,9 @@ public class JSONConverter {
 		return distance;
 	}
 
+	public static String convertDistanceToJSONString(Distance distance) throws Exception {
+		ObjectMapper objectMapper = new ObjectMapper();
+		return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(distance);
+	}
+
 }

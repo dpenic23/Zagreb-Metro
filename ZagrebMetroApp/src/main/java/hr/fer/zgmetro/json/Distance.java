@@ -2,17 +2,17 @@ package hr.fer.zgmetro.json;
 
 public class Distance {
 
-	private int distance;
+	private String distance;
 
-	public Distance(int distance) {
+	public Distance(String distance) {
 		this.distance = distance;
 	}
 
-	public int getDistance() {
+	public String getDistance() {
 		return distance;
 	}
 
-	public void setDistance(int distance) {
+	public void setDistance(String distance) {
 		this.distance = distance;
 	}
 

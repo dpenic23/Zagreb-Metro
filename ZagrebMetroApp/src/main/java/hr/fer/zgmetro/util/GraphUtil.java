@@ -42,5 +42,13 @@ public class GraphUtil {
 			TripCounterAlgorithm algorithm) {
 		return algorithm.findTripsWithStopsLimit(graph, startNode, endNode, stops);
 	}
-
+	
+	public static List<Path> findRoundTripsWithStopsLimit(Graph graph, String node, int stops)	{
+		return findRoundTripsWithStopsLimit(graph, node, stops, DEFAULT_TRIP_COUNTER_ALG);
+	}
+	
+	public static List<Path> findRoundTripsWithStopsLimit(Graph graph, String node, int stops, 
+			TripCounterAlgorithm algorithm)	{
+		return algorithm.findRoundTripsWithStopsLimit(graph, node, stops);
+	}	
 }

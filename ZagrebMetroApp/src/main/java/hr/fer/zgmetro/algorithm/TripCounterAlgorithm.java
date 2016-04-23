@@ -8,5 +8,6 @@ import hr.fer.zgmetro.model.Path;
 public interface TripCounterAlgorithm {
 
 	List<Path> findTripsWithStopsLimit(Graph graph, String startNode, String endNode, int stopLimit);
+	List<Path> findRoundTripsWithStopsLimit(Graph graph, String node, int stopLimit);
 
 }

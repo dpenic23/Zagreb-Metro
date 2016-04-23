@@ -2,8 +2,6 @@ package hr.fer.zgmetro.console;
 
 import java.util.ArrayList;
 
-import hr.fer.zgmetro.algorithm.TripCounterImpl;
-import hr.fer.zgmetro.algorithm.TripDistanceImpl;
 import hr.fer.zgmetro.model.Graph;
 import hr.fer.zgmetro.model.loader.FileLoader;
 

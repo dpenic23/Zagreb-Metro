@@ -3,6 +3,8 @@ package hr.fer.zgmetro.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,19 +20,18 @@ import hr.fer.zgmetro.model.loader.IGraphLoader;
 @Controller
 public class MetroTripController {
 
-	private static IGraphLoader graphLoader = new FileLoader("/src/main/resources/metro.txt");
-	private static Graph metroGraph = graphLoader.load();
+//	private static IGraphLoader graphLoader = new FileLoader("/src/main/resources/metro.txt");
+//	private static Graph metroGraph = graphLoader.load();
 	
 	private static final String VIEW_INDEX = "index";
 	private final static org.slf4j.Logger logger = LoggerFactory.getLogger(MetroTripController.class);
 
 	// POST
 	@RequestMapping(value = "/trip/distance", method = RequestMethod.POST)
-	public String calculateTripDistance(@RequestBody final Stations stationsReceived, ModelMap model) {
+	public String calculateTripDistance(HttpServletRequest request, ModelMap model) {
 
 		// logger.debug("[welcome] counter : {}", counter);
 
-		List<String> stations = new ArrayList<String>();
 		
 		
 		logger.debug("Distance to be calculated...");

@@ -17,19 +17,23 @@ public class FileLoader implements IGraphLoader {
 	private HashMap<String, Node> nodes = new HashMap<>();
 	private Graph graph;
 
-	public FileLoader(String filename) throws IOException {
-		String path = "./inputFiles/" + filename.trim();
+	public FileLoader(String filename){
+		String path = filename.trim();
 
-		List<String> lines = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
-		String line = "";
+		List<String> lines;
+		try {
+			lines = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
+			String line = "";
 
-		for (String l : lines) {
-			line += l;
+			for (String l : lines) {
+				line += l;
+			}
+
+			parse(line);
+			graph = new Graph(nodes);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-
-		parse(line);
-		graph = new Graph(nodes);
-
 	}
 
 	private void parse(String line) throws LoaderException {

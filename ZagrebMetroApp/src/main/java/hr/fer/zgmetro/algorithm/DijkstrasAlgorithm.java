@@ -7,7 +7,7 @@ import java.util.TreeMap;
 import hr.fer.zgmetro.model.Graph;
 import hr.fer.zgmetro.model.Node;
 
-public class ShortestDistance implements ShortestDistanceAlgorithm {
+public class DijkstrasAlgorithm implements ShortestDistanceAlgorithm {
 
 	@Override
 	public int calculateShortestDistance(Graph graph, String startNode, String endNode) {

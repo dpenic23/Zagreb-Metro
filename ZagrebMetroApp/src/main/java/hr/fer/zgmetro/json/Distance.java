@@ -8,7 +8,7 @@ public class Distance implements Serializable {
 	 * Default serial version ID.
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private int id;
 
 	private int distance;

@@ -2,7 +2,7 @@ package hr.fer.zgmetro.console;
 
 import java.util.ArrayList;
 
-import hr.fer.zgmetro.algorithm.TripCounter;
+import hr.fer.zgmetro.algorithm.TripCounterImpl;
 import hr.fer.zgmetro.algorithm.TripDistanceImpl;
 import hr.fer.zgmetro.model.Graph;
 import hr.fer.zgmetro.model.loader.FileLoader;
@@ -25,20 +25,20 @@ public class ZagrebMetroConsoleApp {
 			trip.add("MAKSIMIR");
 			trip.add("SIGET");
 			trip.add("SPANSKO");
-			System.out.println("distance 1 = " + TripDistanceImpl.calculate(graph, trip));
+			//System.out.println("distance 1 = " + TripDistanceImpl.calculate(graph, trip));
 
 			// Case 2
 			trip.clear();
 			trip.add("MAKSIMIR");
 			trip.add("MEDVESCAK");
-			System.out.println("distance 2 = " + TripDistanceImpl.calculate(graph, trip));
+			//System.out.println("distance 2 = " + TripDistanceImpl.calculate(graph, trip));
 
 			// Case 3
 			trip.clear();
 			trip.add("MAKSIMIR");
 			trip.add("MEDVESCAK");
 			trip.add("SPANSKO");
-			System.out.println("distance 3 = " + TripDistanceImpl.calculate(graph, trip));
+			//System.out.println("distance 3 = " + TripDistanceImpl.calculate(graph, trip));
 
 			// Case 4
 			trip.clear();
@@ -47,14 +47,14 @@ public class ZagrebMetroConsoleApp {
 			trip.add("SIGET");
 			trip.add("SPANSKO");
 			trip.add("MEDVESCAK");
-			System.out.println("distance 4 = " + TripDistanceImpl.calculate(graph, trip));
+			//System.out.println("distance 4 = " + TripDistanceImpl.calculate(graph, trip));
 
 			// Case 5
 			trip.clear();
 			trip.add("MAKSIMIR");
 			trip.add("DUBRAVA");
 			trip.add("MEDVESCAK");
-			System.out.println("distance 5 = " + TripDistanceImpl.calculate(graph, trip));
+			//System.out.println("distance 5 = " + TripDistanceImpl.calculate(graph, trip));
 
 			// Testing TripCounter algorithm METRO-3 METRO-4
 			String station;
@@ -62,7 +62,7 @@ public class ZagrebMetroConsoleApp {
 
 			// Case 1
 			station = "SPANSKO";
-			for (int i = 1; i <= 3; i++)
-				System.out.println("roundtrips 1 = " + TripCounter.calculate(graph, station, station, i).toString());
+			//for (int i = 1; i <= 3; i++)
+				//System.out.println("roundtrips 1 = " + TripCounterImpl.calculate(graph, station, station, i).toString());
 	}
 }

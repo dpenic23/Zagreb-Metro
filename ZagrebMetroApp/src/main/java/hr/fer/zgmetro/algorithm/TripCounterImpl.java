@@ -8,7 +8,7 @@ import hr.fer.zgmetro.model.Graph;
 import hr.fer.zgmetro.model.Node;
 import hr.fer.zgmetro.model.Path;
 
-public class TripCounter implements TripCounterAlgorithm {
+public class TripCounterImpl implements TripCounterAlgorithm {
 
 	// matro 3 je poseban slucaj metro4
 	

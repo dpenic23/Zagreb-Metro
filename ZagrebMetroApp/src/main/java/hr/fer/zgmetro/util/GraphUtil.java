@@ -3,9 +3,9 @@ package hr.fer.zgmetro.util;
 import java.util.List;
 
 import hr.fer.zgmetro.algorithm.TripDistanceImpl;
-import hr.fer.zgmetro.algorithm.ShortestDistance;
+import hr.fer.zgmetro.algorithm.DijkstrasAlgorithm;
 import hr.fer.zgmetro.algorithm.ShortestDistanceAlgorithm;
-import hr.fer.zgmetro.algorithm.TripCounter;
+import hr.fer.zgmetro.algorithm.TripCounterImpl;
 import hr.fer.zgmetro.algorithm.TripCounterAlgorithm;
 import hr.fer.zgmetro.algorithm.TripDistanceAlgorithm;
 import hr.fer.zgmetro.model.Graph;
@@ -14,8 +14,8 @@ import hr.fer.zgmetro.model.Path;
 public class GraphUtil {
 
 	private static TripDistanceAlgorithm DEFAULT_TRIP_DIST_ALG = new TripDistanceImpl();
-	private static ShortestDistanceAlgorithm DEFAULT_SHORTEST_DIST_ALG = new ShortestDistance();
-	private static TripCounterAlgorithm DEFAULT_TRIP_COUNTER_ALG = new TripCounter();
+	private static ShortestDistanceAlgorithm DEFAULT_SHORTEST_DIST_ALG = new DijkstrasAlgorithm();
+	private static TripCounterAlgorithm DEFAULT_TRIP_COUNTER_ALG = new TripCounterImpl();
 
 	public static int calculateTripDistance(Graph graph, List<String> trip) {
 		return calculateTripDistance(graph, trip, DEFAULT_TRIP_DIST_ALG);

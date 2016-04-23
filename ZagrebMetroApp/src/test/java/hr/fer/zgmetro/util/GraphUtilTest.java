@@ -1,12 +1,10 @@
 package hr.fer.zgmetro.util;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import hr.fer.zgmetro.algorithm.DijkstrasAlgorithm;
 import hr.fer.zgmetro.algorithm.ShortestDistanceAlgorithm;
-import hr.fer.zgmetro.algorithm.TripDistanceAlgorithm;
 import hr.fer.zgmetro.model.Graph;
 import hr.fer.zgmetro.model.Path;
 import hr.fer.zgmetro.model.loader.FileLoader;

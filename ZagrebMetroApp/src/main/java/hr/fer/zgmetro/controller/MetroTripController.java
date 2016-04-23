@@ -65,9 +65,7 @@ public class MetroTripController {
 	@RequestMapping(value = "/trip/round/count/{station}", method = RequestMethod.GET)
 	public String calculateRoundTrips(@PathVariable String station, ModelAndView modelAndView) {
 
-		logger.debug("Round trips to be calculated...");
-		// model.addAttribute("message", station);
-
+		
 		return VIEW_INDEX;
 
 	}

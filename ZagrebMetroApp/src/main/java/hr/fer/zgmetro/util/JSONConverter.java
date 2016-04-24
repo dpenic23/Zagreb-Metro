@@ -1,9 +1,5 @@
 package hr.fer.zgmetro.util;
 
-import java.io.IOException;
-
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import hr.fer.zgmetro.json.Distance;

@@ -1,11 +1,8 @@
 package hr.fer.zgmetro.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,15 +13,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
 import hr.fer.zgmetro.json.Distance;
 import hr.fer.zgmetro.json.PairOfStations;
 import hr.fer.zgmetro.json.PathsWithStops;
 import hr.fer.zgmetro.json.Stations;
 import hr.fer.zgmetro.json.StationsWithStops;
 import hr.fer.zgmetro.model.Graph;
-import hr.fer.zgmetro.model.Node;
 import hr.fer.zgmetro.model.Path;
 import hr.fer.zgmetro.model.loader.FileLoader;
 import hr.fer.zgmetro.model.loader.IGraphLoader;
@@ -66,15 +60,18 @@ public class MetroTripController {
 	}
 
 	@RequestMapping(value = "/trip/round/count/{station}", method = RequestMethod.GET)
-	public String calculateRoundTrips(HttpServletRequest request, @PathVariable String station, Model model) throws Exception {
+	public String calculateRoundTrips(HttpServletRequest request, @PathVariable String station, Model model)
+			throws Exception {
 		int max = 3;
-		LinkedList<Path> paths = (LinkedList<Path>) GraphUtil.findRoundTripsWithStopsLimit(loadGraph(request), station, max);		
+		LinkedList<Path> paths = (LinkedList<Path>) GraphUtil.findRoundTripsWithStopsLimit(loadGraph(request), station,
+				max);
 
 		List<String> list = new ArrayList<>();
 		for (Path p : paths) {
 			list.add(p.toString());
 		}
-		model.addAttribute("json", JSONConverter.convertPathsWithStopstoJSONString(new PathsWithStops(paths.size(), list)));
+		model.addAttribute("json",
+				JSONConverter.convertPathsWithStopstoJSONString(new PathsWithStops(paths.size(), list)));
 
 		return VIEW_INDEX;
 
@@ -86,8 +83,9 @@ public class MetroTripController {
 		String jsonRequest = IOUtil.getStringFromInputStream(request.getInputStream());
 		StationsWithStops stationsWithStops = JSONConverter.convertJSONStringtoStationsWithStops(jsonRequest);
 
-		List<Path> paths = GraphUtil.findTripsWithStopsLimit(loadGraph(request), stationsWithStops.getStations().get("start"), 
-				stationsWithStops.getStations().get("end"), stationsWithStops.getStops());
+		List<Path> paths = GraphUtil.findTripsWithStopsLimit(loadGraph(request),
+				stationsWithStops.getStations().get("start"), stationsWithStops.getStations().get("end"),
+				stationsWithStops.getStops());
 
 		List<String> list = new ArrayList<>();
 		for (Path p : paths) {
@@ -95,8 +93,9 @@ public class MetroTripController {
 			p.removeEnd();
 			list.add(p.toString());
 		}
-		model.addAttribute("json", JSONConverter.convertPathsWithStopstoJSONString(new PathsWithStops(paths.size(), list)));
-		
+		model.addAttribute("json",
+				JSONConverter.convertPathsWithStopstoJSONString(new PathsWithStops(paths.size(), list)));
+
 		return VIEW_INDEX;
 
 	}

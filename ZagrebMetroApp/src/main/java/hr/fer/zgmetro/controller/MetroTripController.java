@@ -95,7 +95,7 @@ public class MetroTripController {
 				returnValue = distance + "";
 			}
 
-			model.addAttribute("json", returnValue);
+			model.addAttribute("json", JSONConverter.convertDistanceToJSONString(new Distance(returnValue)));
 		} catch (Exception e) {
 			logger.debug(e.getLocalizedMessage());
 		}

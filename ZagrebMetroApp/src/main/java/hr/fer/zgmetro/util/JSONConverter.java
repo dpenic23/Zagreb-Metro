@@ -36,5 +36,10 @@ public class JSONConverter {
 
 		return pairOfStations;
 	}
+	
+	public static void main(String[] args) throws Exception {
+		Distance distance = new Distance(3 + "");
+		System.out.println(convertDistanceToJSONString(distance));
+	}
 
 }

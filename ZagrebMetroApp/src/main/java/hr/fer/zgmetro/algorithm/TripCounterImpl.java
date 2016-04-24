@@ -10,8 +10,6 @@ import hr.fer.zgmetro.model.Path;
 
 public class TripCounterImpl implements TripCounterAlgorithm {
 
-	// matro 3 je poseban slucaj metro4
-	
 	@Override
 	public List<Path> findTripsWithStopsLimit(Graph graph, String startNode, String endNode, int stopLimit) {
 
@@ -23,8 +21,6 @@ public class TripCounterImpl implements TripCounterAlgorithm {
 
 		return paths;
 	}
-
-	
 
 	public static LinkedList<LinkedList<String>> recursion(Graph graph, String state, String goal, int n) {
 		LinkedList<LinkedList<String>> ret = new LinkedList<>();
@@ -52,6 +48,15 @@ public class TripCounterImpl implements TripCounterAlgorithm {
 			ret.addAll(tmp);
 		}
 
+		return ret;
+	}
+
+	@Override
+	public List<Path> findRoundTripsWithStopsLimit(Graph graph, String node, int stopLimit) {
+		List<Path> ret = new LinkedList<>();
+		for (int i = 1; i <= stopLimit; ++i) {
+			ret.addAll(findTripsWithStopsLimit(graph, node, node, i));
+		}
 		return ret;
 	}
 }

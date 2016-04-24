@@ -1,10 +1,9 @@
 package hr.fer.zgmetro.controller;
 
-import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,12 +16,16 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import hr.fer.zgmetro.json.Distance;
+import hr.fer.zgmetro.json.PairOfStations;
+import hr.fer.zgmetro.json.PathsWithStops;
 import hr.fer.zgmetro.json.Stations;
+import hr.fer.zgmetro.json.StationsWithStops;
 import hr.fer.zgmetro.model.Graph;
+import hr.fer.zgmetro.model.Node;
+import hr.fer.zgmetro.model.Path;
 import hr.fer.zgmetro.model.loader.FileLoader;
 import hr.fer.zgmetro.model.loader.IGraphLoader;
 import hr.fer.zgmetro.util.GraphUtil;
@@ -35,7 +38,6 @@ public class MetroTripController {
 	private static final String VIEW_INDEX = "index";
 	private final static org.slf4j.Logger logger = LoggerFactory.getLogger(MetroTripController.class);
 
-	// POST
 	@RequestMapping(value = "/trip/distance", method = RequestMethod.POST)
 	public String calculateTripDistance(HttpServletRequest request, ModelMap model) {
 		logger.debug("Received request for distance calculation.");
@@ -52,9 +54,10 @@ public class MetroTripController {
 			if (distance == -1) {
 				returnValue = "NO SUCH ROUTE";
 			} else {
-				returnValue = JSONConverter.convertDistanceToJSONString(new Distance(distance));
+				returnValue = distance + "";
 			}
-			model.addAttribute("json", returnValue);
+
+			model.addAttribute("json", JSONConverter.convertDistanceToJSONString(new Distance(returnValue)));
 		} catch (Exception e) {
 			logger.debug(e.getLocalizedMessage());
 		}
@@ -63,31 +66,66 @@ public class MetroTripController {
 	}
 
 	@RequestMapping(value = "/trip/round/count/{station}", method = RequestMethod.GET)
-	public String calculateRoundTrips(@PathVariable String station, ModelAndView modelAndView) {
+	public String calculateRoundTrips(HttpServletRequest request, @PathVariable String station, Model model) throws Exception {
+		int max = 3;
+		LinkedList<Path> paths = (LinkedList<Path>) GraphUtil.findRoundTripsWithStopsLimit(loadGraph(request), station, max);		
 
-		
+		List<String> list = new ArrayList<>();
+		for (Path p : paths) {
+			list.add(p.toString());
+		}
+		model.addAttribute("json", JSONConverter.convertPathsWithStopstoJSONString(new PathsWithStops(paths.size(), list)));
+
 		return VIEW_INDEX;
 
 	}
 
 	// POST
 	@RequestMapping(value = "/trip/count", method = RequestMethod.POST)
-	public String calculateTrips(@PathVariable String station, ModelMap model) {
+	public String calculateTrips(HttpServletRequest request, Model model) throws Exception {
+		String jsonRequest = IOUtil.getStringFromInputStream(request.getInputStream());
+		StationsWithStops stationsWithStops = JSONConverter.convertJSONStringtoStationsWithStops(jsonRequest);
 
-		logger.debug("Trips to be calculated...");
-		model.addAttribute("message", "Trips to be calculated...");
+		List<Path> paths = GraphUtil.findTripsWithStopsLimit(loadGraph(request), stationsWithStops.getStations().get("start"), 
+				stationsWithStops.getStations().get("end"), stationsWithStops.getStops());
 
+		List<String> list = new ArrayList<>();
+		for (Path p : paths) {
+			p.removeStart();
+			p.removeEnd();
+			list.add(p.toString());
+		}
+		model.addAttribute("json", JSONConverter.convertPathsWithStopstoJSONString(new PathsWithStops(paths.size(), list)));
+		
 		return VIEW_INDEX;
 
 	}
 
 	// POST
 	@RequestMapping(value = "/trip/shortest", method = RequestMethod.POST)
-	public String calculateShortestPath(ModelMap model) {
+	public String calculateShortestPath(HttpServletRequest request, ModelMap model) {
+		logger.debug("Received request for distance calculation.");
 
-		logger.debug("Shortest path to be calculated...");
-		model.addAttribute("message", "Shortest path to be calculated...");
+		try {
+			String jsonRequest = IOUtil.getStringFromInputStream(request.getInputStream());
+			PairOfStations stations = JSONConverter.convertJSONStringToPairOfStations(jsonRequest);
+			logger.debug("Calculating shortest path between stations.");
 
+			Graph graph = loadGraph(request);
+			int distance = GraphUtil.calculateShortestDistance(graph, stations.getStations().get("start"),
+					stations.getStations().get("end"));
+
+			String returnValue;
+			if (distance == -1) {
+				returnValue = "NO SUCH ROUTE";
+			} else {
+				returnValue = distance + "";
+			}
+
+			model.addAttribute("json", JSONConverter.convertDistanceToJSONString(new Distance(returnValue)));
+		} catch (Exception e) {
+			logger.debug(e.getLocalizedMessage());
+		}
 		return VIEW_INDEX;
 	}
 

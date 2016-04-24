@@ -18,6 +18,14 @@ public class Path {
 		}
 	}
 
+	public void removeStart() {
+		path.remove(0);
+	}
+
+	public void removeEnd() {
+		path.remove(path.size()-1);
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

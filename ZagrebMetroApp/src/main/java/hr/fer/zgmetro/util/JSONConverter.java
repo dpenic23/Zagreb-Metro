@@ -1,10 +1,16 @@
 package hr.fer.zgmetro.util;
 
+import java.io.IOException;
+
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import hr.fer.zgmetro.json.Distance;
 import hr.fer.zgmetro.json.PairOfStations;
+import hr.fer.zgmetro.json.PathsWithStops;
 import hr.fer.zgmetro.json.Stations;
+import hr.fer.zgmetro.json.StationsWithStops;
 
 public class JSONConverter {
 
@@ -36,10 +42,20 @@ public class JSONConverter {
 
 		return pairOfStations;
 	}
-	
-	public static void main(String[] args) throws Exception {
-		Distance distance = new Distance(3 + "");
-		System.out.println(convertDistanceToJSONString(distance));
+
+	public static String convertPathsWithStopstoJSONString(PathsWithStops paths) throws Exception {
+		ObjectMapper objectMapper = new ObjectMapper();
+		return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(paths);
+	}
+
+	public static StationsWithStops convertJSONStringtoStationsWithStops(String jsonStationsWithStops)
+			throws Exception {
+		ObjectMapper objectMapper = new ObjectMapper();
+
+		StationsWithStops stationsWithStops = objectMapper.readValue(jsonStationsWithStops, StationsWithStops.class);
+
+		return stationsWithStops;
+
 	}
 
 }

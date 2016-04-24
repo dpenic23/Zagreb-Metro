@@ -1,9 +1,17 @@
 package hr.fer.zgmetro.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import hr.fer.zgmetro.json.Distance;
 import hr.fer.zgmetro.json.PairOfStations;
+import hr.fer.zgmetro.json.PathsWithStops;
 import hr.fer.zgmetro.json.Stations;
+import hr.fer.zgmetro.json.StationsWithStops;
 import hr.fer.zgmetro.model.Graph;
+import hr.fer.zgmetro.model.Node;
+import hr.fer.zgmetro.model.Path;
 import hr.fer.zgmetro.model.loader.FileLoader;
 import hr.fer.zgmetro.model.loader.IGraphLoader;
 import hr.fer.zgmetro.util.GraphUtil;
@@ -54,10 +66,15 @@ public class MetroTripController {
 	}
 
 	@RequestMapping(value = "/trip/round/count/{station}", method = RequestMethod.GET)
-	public String calculateRoundTrips(@PathVariable String station, ModelAndView modelAndView) {
+	public String calculateRoundTrips(HttpServletRequest request, @PathVariable String station, Model model) throws Exception {
+		int max = 3;
+		LinkedList<Path> paths = (LinkedList<Path>) GraphUtil.findRoundTripsWithStopsLimit(loadGraph(request), station, max);		
 
-		logger.debug("Round trips to be calculated...");
-		// model.addAttribute("message", station);
+		List<String> list = new ArrayList<>();
+		for (Path p : paths) {
+			list.add(p.toString());
+		}
+		model.addAttribute("json", JSONConverter.convertPathsWithStopstoJSONString(new PathsWithStops(paths.size(), list)));
 
 		return VIEW_INDEX;
 
@@ -65,11 +82,21 @@ public class MetroTripController {
 
 	// POST
 	@RequestMapping(value = "/trip/count", method = RequestMethod.POST)
-	public String calculateTrips(@PathVariable String station, ModelMap model) {
+	public String calculateTrips(HttpServletRequest request, Model model) throws Exception {
+		String jsonRequest = IOUtil.getStringFromInputStream(request.getInputStream());
+		StationsWithStops stationsWithStops = JSONConverter.convertJSONStringtoStationsWithStops(jsonRequest);
 
-		logger.debug("Trips to be calculated...");
-		model.addAttribute("message", "Trips to be calculated...");
+		List<Path> paths = GraphUtil.findTripsWithStopsLimit(loadGraph(request), stationsWithStops.getStations().get("start"), 
+				stationsWithStops.getStations().get("end"), stationsWithStops.getStops());
 
+		List<String> list = new ArrayList<>();
+		for (Path p : paths) {
+			p.removeStart();
+			p.removeEnd();
+			list.add(p.toString());
+		}
+		model.addAttribute("json", JSONConverter.convertPathsWithStopstoJSONString(new PathsWithStops(paths.size(), list)));
+		
 		return VIEW_INDEX;
 
 	}
